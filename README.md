@@ -1,6 +1,6 @@
 # DeepDeform (CVPR'2020)
 
-DeepDeform is an RGB-D video dataset containing over 390k frames in 400 videos, with [INSERT FINAL] optical and scene flow images and [INSERT FINAL] foreground object masks. Furthermore, we also provide [INSERT FINAL] sparse match annotations and [INSERT FINAL] occlusion point annotations.
+DeepDeform is an RGB-D video dataset containing over 390,000 RGB-D frames in 400 videos, with [INSERT FINAL] optical and scene flow images and [INSERT FINAL] foreground object masks. We also provide [INSERT FINAL] sparse match annotations and [INSERT FINAL] occlusion point annotations.
 
 
 ## Download Data
@@ -12,7 +12,7 @@ If you would like to download the DeepDeform data, please fill out [this google 
 
 ## Data Organization
 
-Data is organized into 3 subsets, `train`, `val` and `test` directories, using `340-30-30` sequence split. In every subset each RGB-D sequence is stored in a directory `<sequence_id>`, which follows the following format:
+Data is organized into 3 subsets, `train`, `val`, and `test` directories, using `340-30-30` sequence split. In every subset each RGB-D sequence is stored in a directory `<sequence_id>`, which follows the following format:
 
 ```
 <sequence_id>
