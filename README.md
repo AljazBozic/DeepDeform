@@ -1,4 +1,4 @@
-# DeepDeform
+# DeepDeform (CVPR'2020)
 
 DeepDeform is an RGB-D video dataset containing over 390k frames in 400 videos, with [INSERT FINAL] optical and scene flow images and [INSERT FINAL] foreground object masks. Furthermore, we also provide [INSERT FINAL] sparse match annotations and [INSERT FINAL] occlusion point annotations.
 
