@@ -92,6 +92,6 @@ If you have any questions, please contact us at deepdeform@googlegroups.com, or 
 
 ## License
 
-The data is released under [DeepDeform Terms of Use], and the code is release under the MIT license. 
+The data is released under [DeepDeform Terms of Use], and the code is release under a non-comercial creative commons license. 
 
 [DeepDeform Terms of Use]: https://docs.google.com/forms/d/e/1FAIpQLSeQ1hkCmmTiib-oQM9s21y3Tz9ojiI2zB8vZSqTZjT2DiRZ0g/viewform
