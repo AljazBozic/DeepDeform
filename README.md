@@ -10,6 +10,31 @@ If you would like to download the DeepDeform data, please fill out [this google 
 [this google form]: https://docs.google.com/forms/d/e/1FAIpQLSeQ1hkCmmTiib-oQM9s21y3Tz9ojiI2zB8vZSqTZjT2DiRZ0g/viewform
 
 
+## Online Benchmark
+
+If you want to participate in the benchmark(s), you can submit your results at [DeepDeform Benchmark] website.
+
+Currently we provide benchmarks for the following tasks:
+- [Optical Flow]
+- [Non-rigid Reconstruction]
+
+By uploading your results on the test set to the [DeepDeform Benchmark] website the performance of you method is automatically evaluated on the hidden test labels, and compared to other already evaluated methods. You can decide if you want to make the evaluation results public or not.
+
+If you want to evaluate on validation set, we provide code that is used for evaluation of specific benchmarks in directory `evaluation/`. To evaluate optical flow or non-rigid reconstruction, you need to adapt `FLOW_RESULTS_DIR` or `RECONSTRUCTION_RESULTS_DIR` in `config.py` to correspond to your results directory (that would be in the same format as for the online submission, described [here]).
+
+In order to evaluate reconstruction, you need to compile additional C++ modules.
+
+- Inside the `evaluation/csrc` adapt `includes.py` to point to your `Eigen` include directory.
+- Compile the code by executing the following in `evaluation/csrc`:
+```
+python setup.py install
+```
+
+[DeepDeform Benchmark]: http://kaldir.vc.in.tum.de/deepdeform_benchmark
+[Optical Flow]: http://kaldir.vc.in.tum.de/deepdeform_benchmark/benchmark_optical_flow
+[Non-rigid Reconstruction]: http://kaldir.vc.in.tum.de/deepdeform_benchmark/benchmark_reconstruction
+[here]: http://kaldir.vc.in.tum.de/deepdeform_benchmark/documentation
+
 ## Data Organization
 
 Data is organized into 3 subsets, `train`, `val`, and `test` directories, using `340-30-30` sequence split. In every subset each RGB-D sequence is stored in a directory `<sequence_id>`, which follows the following format:
@@ -44,6 +69,7 @@ We recommend you to test out scripts in `demo/` directory in order to check out 
 
 **Scene Flow Data**: Dense scene flow data is provided as custom binary image of resolution 640x480 with extension .sflow. Every pixel contains 3 values for flow in x, y and z direction, in meters. Helper function to load/store binary flow images is provided in `utils.py`.
 
+
 **Object Mask Data**: A few frames per sequences also include foreground dynamic object annotation. The mask image is given as 16-bit .png image (1 for object, 0 for background).
 
 **Sparse Match Annotations**: We provide manual sparse match annotations for a few frame pairs for every sequence. They are stored in .json format, with paths to corresponding source and target RGB-D frames, as a list of source and target pixels.
@@ -51,25 +77,6 @@ We recommend you to test out scripts in `demo/` directory in order to check out 
 **Sparse Occlusion Annotations**: We provide manual sparse occlusion annotations for a few frame pairs for every sequence. They are stored in .json format, with paths to corresponding source and target RGB-D frames, as a list of occluded pixels in source frame.
 
 
-## Benchmark Tasks
-
-In directory `evaluation/` we provide code that is used for evaluation of specific benchmarks:
-- Optical Flow
-- Non-rigid Reconstruction
-
-If you want to participate in the benchmark(s), you can submit your results at [DeepDeform Benchmark] website.
-
-[DeepDeform Benchmark]: http://mars.vc.in.tum.de/deepdeform_benchmark
-
-To evaluate flow or reconstruction, you need to adapt `FLOW_RESULTS_DIR` or `RECONSTRUCTION_RESULTS_DIR` in `config.py` to correspond to your results directory (that would be in the same format as published online for submission).
-
-In order to evaluate reconstruction, you need to compile additional C++ modules.
-
-- Inside the `evaluation/csrc` adapt `includes.py` to point to your `Eigen` include directory.
-- Compile the code by executing the following in `evaluation/csrc`:
-```
-python setup.py install
-```
 
 
 ## Citation
