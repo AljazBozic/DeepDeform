@@ -1,3 +1,6 @@
+import os, sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import numpy as np
 import pathlib
 import subprocess
@@ -11,6 +14,7 @@ import json
 import utils
 from enum import Enum
 from tqdm import tqdm
+import config as cfg
 
 
 IMAGE_WIDTH = 640
@@ -71,7 +75,16 @@ def evaluate(groundtruth_matches_json_path, predictions_dir):
         for match in frame_pair["matches"]:
             # Read keypoint and match.
             source_kp = np.array([match["source_x"], match["source_y"]])
-            target_kp = np.array([mat    # predictions_dir = r"D:\DeformData\uploaded_data\flow\pwc_net"
+            target_kp = np.array([match["target_x"], match["target_y"]])
+
+            source_kp_rounded = np.round(source_kp)
+            target_kp_rounded = np.round(target_kp)
+
+            # Make sure it's in bounds.
+            assert in_bounds(source_kp_rounded, IMAGE_WIDTH, IMAGE_HEIGHT) and \
+                    in_bounds(source_kp_rounded, IMAGE_WIDTH, IMAGE_HEIGHT)
+
+            source_v, source_u = source_kp_rounded[1].astype(np.int64), source_kp_rounded[0].astype(np.int64)
 
             flow_pred = flow_image_pred[source_v, source_u]
             flow_gt = (target_kp - source_kp_rounded).astype(np.float32)
@@ -130,7 +143,7 @@ def evaluate(groundtruth_matches_json_path, predictions_dir):
 
 
 if __name__ == "__main__":
-    groundtruth_matches_json_path = os.path.join(cfg.DATA_ROOT_DIR, "{0}._matches.json".format(cfg.DATA_TYPE))
+    groundtruth_matches_json_path = os.path.join(cfg.DATA_ROOT_DIR, "{0}_matches.json".format(cfg.DATA_TYPE))
     predictions_dir = cfg.FLOW_RESULTS_DIR
 
     evaluate(groundtruth_matches_json_path, predictions_dir)

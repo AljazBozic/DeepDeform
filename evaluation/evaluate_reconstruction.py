@@ -1,3 +1,6 @@
+import os, sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import numpy as np
 import pathlib
 import subprocess
@@ -13,7 +16,7 @@ from enum import Enum
 from tqdm import tqdm
 from skimage import io
 from plyfile import PlyData, PlyElement
-from DeepDeform_Eval._C import evaluate_deform as evaluate_deform_c, evaluate_geometry as evaluate_geometry_c
+from DeepDeform_Eval import evaluate_deform as evaluate_deform_c, evaluate_geometry as evaluate_geometry_c
 import config as cfg
 
 
@@ -28,7 +31,7 @@ class Status(Enum):
     INCONSISTENT_MESHES = 1
 
 
-def load_mesh(mesh_path, mesh_cache):
+def load_pointcloud(mesh_path, mesh_cache):
     if mesh_path in mesh_cache:
         plydata = mesh_cache[mesh_path]
     
@@ -43,10 +46,7 @@ def load_mesh(mesh_path, mesh_cache):
     vertex_z = np.expand_dims(plydata['vertex']['z'], axis=1)
     vertex_coords = np.concatenate((vertex_x, vertex_y, vertex_z), axis=1) 
 
-    face_vertices = plydata['face']['vertex_indices']
-    face_vertices = np.stack(face_vertices, axis=0)
-
-    return vertex_coords, face_vertices
+    return vertex_coords
 
 
 def evaluate(
@@ -209,7 +209,7 @@ def evaluate(
                     segment_geometry_num_valid += 1
                     continue
 
-                vertices, faces = load_mesh(mesh_path, mesh_cache)
+                vertices = load_pointcloud(mesh_path, mesh_cache)
                 num_vertices = vertices.shape[0]
 
                 # Execute geometry evaluation.
@@ -276,8 +276,8 @@ def evaluate(
                     segment_deform_num_valid += 1
                     continue
 
-                source_vertices, source_faces = load_mesh(source_mesh_path, mesh_cache)
-                target_vertices, target_faces = load_mesh(target_mesh_path, mesh_cache)
+                source_vertices = load_pointcloud(source_mesh_path, mesh_cache)
+                target_vertices = load_pointcloud(target_mesh_path, mesh_cache)
 
                 num_vertices = source_vertices.shape[0]
                 if target_vertices.shape[0] != num_vertices:
@@ -387,8 +387,8 @@ def evaluate(
     
 
 if __name__ == "__main__":
-    groundtruth_matches_json_path = os.path.join(cfg.DATA_ROOT_DIR, "{0}._matches.json".format(cfg.DATA_TYPE))
-    groundtruth_masks_json_path = os.path.join(cfg.DATA_ROOT_DIR, "{0}._masks.json".format(cfg.DATA_TYPE))
+    groundtruth_matches_json_path = os.path.join(cfg.DATA_ROOT_DIR, "{0}_matches.json".format(cfg.DATA_TYPE))
+    groundtruth_masks_json_path = os.path.join(cfg.DATA_ROOT_DIR, "{0}_masks.json".format(cfg.DATA_TYPE))
     reconstructions_dir = cfg.RECONSTRUCTION_RESULTS_DIR
     sequence_data_dir = os.path.join(cfg.DATA_ROOT_DIR, cfg.DATA_TYPE)
 

@@ -24,7 +24,18 @@ If you want to evaluate on validation set, we provide code that is used for eval
 
 In order to evaluate reconstruction, you need to compile additional C++ modules.
 
+- Install necessary dependencies:
+```
+pip install pybind11
+pip install Pillow
+pip install plyfile
+pip install tqdm
+pip install scikit-image
+
+```
+
 - Inside the `evaluation/csrc` adapt `includes.py` to point to your `Eigen` include directory.
+
 - Compile the code by executing the following in `evaluation/csrc`:
 ```
 python setup.py install
@@ -52,8 +63,7 @@ Data is organized into 3 subsets, `train`, `val`, and `test` directories, using 
 All labels are provided in `.json` files in root dataset r directory:
 - `train_matches.json` and `val_matches.json`: <br>Manually annotated sparse matches.
 - `train_dense.json` and `val_dense.json`: <br>Densely aligned optical and scene flow images with the use of sparse matches as a guidance.
-- `train_selfsupervised.json` and `val_selfsupervised.json`: <br>Densely aligned optical and scene flow images using self-supervision (DynamicFusion pipeline) for a few sequences.
-- `train_masks.json` and `val_masks.json`: <br>Dynamic object annotations for a few frames per sequence.
+- `train_selfsupervised.json` and `val_skaldir
 - `train_occlusions.json` and `val_occlusions.json`: <br>Manually annotated sparse occlusions.
 
 
@@ -93,8 +103,7 @@ If you use DeepDeform data or code please cite:
 
 
 ## Help
-
-If you have any questions, please contact us at deepdeform@googlegroups.com, or open an issue at Github.
+kaldir
 
 
 ## License

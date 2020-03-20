@@ -1,10 +1,10 @@
-#include <torch/extension.h>
+#include <pybind11/pybind11.h>
 
 #include "cpu/image_proc.h"
 #include "cpu/eval_proc.h"
 
 // Definitions of all methods in the module.
-PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
+PYBIND11_MODULE(DeepDeform_Eval, m) {
 
   m.def("backproject_depth", &image_proc::backproject_depth, "Backprojects valid depth values into 3D points using intrinsics");
   m.def("mask_depth", &image_proc::mask_depth, "Masks out depth values outside the given mask image");

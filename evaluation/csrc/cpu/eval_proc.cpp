@@ -63,7 +63,7 @@ namespace eval_proc {
 
         std::vector<float> distances(nMatches, -1.f);
         
-#		pragma omp parallel for
+// #		pragma omp parallel for
         for (int i = 0; i < nMatches; i++) {
             Eigen::Vector2f sourceKeypoint(*sourcePixels.data(i, 0), *sourcePixels.data(i, 1));
             Eigen::Vector2f targetKeypoint(*targetPixels.data(i, 0), *targetPixels.data(i, 1));
@@ -232,7 +232,7 @@ namespace eval_proc {
         // Compute per pixel distances from depth points to estimated mesh.
         std::vector<float> distances(width * height, -1.f);
 
-#		pragma omp parallel for
+// #		pragma omp parallel for
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 Eigen::Vector3f observation(

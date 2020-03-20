@@ -2,11 +2,12 @@
 
 #include <iostream>
 
-#include <torch/extension.h>
 #include <pybind11/stl.h>
 #include <pybind11/pybind11.h>
 #include <pybind11/numpy.h>
 #include <Eigen/Dense>
+
+namespace py = pybind11;
 
 namespace image_proc {
 

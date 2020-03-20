@@ -62,7 +62,7 @@ namespace image_proc {
         int width = input.shape(1);
         int height = input.shape(0);
 
-#       pragma omp parallel for
+// #       pragma omp parallel for
         for (int y = 0; y < height; ++y) {
             for (int x = 1; x < width - 1; ++x) {
                 if (*output.data(y, x) > 0) {
@@ -78,7 +78,7 @@ namespace image_proc {
         int width = input.shape(1);
         int height = input.shape(0);
 
-#       pragma omp parallel for
+// #       pragma omp parallel for
         for (int y = 1; y < height - 1; ++y) {
             for (int x = 0; x < width; ++x) {
                 if (*output.data(y, x) > 0) {
