@@ -63,7 +63,8 @@ Data is organized into 3 subsets, `train`, `val`, and `test` directories, using 
 All labels are provided in `.json` files in root dataset r directory:
 - `train_matches.json` and `val_matches.json`: <br>Manually annotated sparse matches.
 - `train_dense.json` and `val_dense.json`: <br>Densely aligned optical and scene flow images with the use of sparse matches as a guidance.
-- `train_selfsupervised.json` and `val_skaldir
+- `train_selfsupervised.json` and `val_selfsupervised.json`: <br>Densely aligned optical and scene flow images using self-supervision (DynamicFusion pipeline) for a few sequences.	- `train_selfsupervised.json` and `val_skaldir
+- `train_masks.json` and `val_masks.json`: <br>Dynamic object annotations for a few frames per sequence.
 - `train_occlusions.json` and `val_occlusions.json`: <br>Manually annotated sparse occlusions.
 
 
@@ -103,7 +104,8 @@ If you use DeepDeform data or code please cite:
 
 
 ## Help
-kaldir
+
+If you have any questions, please contact us at deepdeform@googlegroups.com, or open an issue at Github.	
 
 
 ## License
