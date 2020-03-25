@@ -31,7 +31,6 @@ pip install Pillow
 pip install plyfile
 pip install tqdm
 pip install scikit-image
-
 ```
 
 - Inside the `evaluation/csrc` adapt `includes.py` to point to your `Eigen` include directory.
