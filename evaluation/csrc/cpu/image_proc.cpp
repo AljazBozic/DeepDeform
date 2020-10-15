@@ -98,7 +98,7 @@ namespace image_proc {
 
         // We initialize valid depth values.
         for (int y = 1; y < height - 1; ++y) {
-            for (int x = 1; x < height - 1; ++x) {
+            for (int x = 1; x < width - 1; ++x) {
                 if (*depthImage.data(y, x) > 0) {
                     *erodedImage.mutable_data(y, x) = 1;
                     *temp.mutable_data(y, x) = 1;
